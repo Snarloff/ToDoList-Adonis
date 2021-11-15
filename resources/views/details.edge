@@ -1,0 +1,27 @@
+@layout('layouts/main')
+@section('content')
+@set('title', task.title)
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/tasks">Tasks</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Task: {{ task.title }}</li>
+  </ol>
+</nav>
+
+<h1 class="text-dark mb-3">Task: {{ task.title }}</h1>
+<hr class="my-4">
+
+<p class="lead">
+  {{ task.body }}
+</p>
+
+<form action="/tasks/remove/{{ task.slug }}" method="POST">
+  {{ csrfField() }}
+  <button type="submit" class="btn btn-danger">Remove task</button>
+</form>
+
+<a class="btn btn-primary mt-2 float" href="/tasks/edit/{{ task.slug }}">Edit task</a>
+
+@endsection

@@ -1,0 +1,30 @@
+@layout('layouts/main')
+@section('content')
+@set('title', 'Tasks')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Tasks</li>
+  </ol>
+</nav>
+
+<h1 class="text-dark mb-3">Tasks</h1>
+
+@if(old('notification'))
+
+  <div class="alert alert-success mb-3" role="alert">
+    {{ old('notification') }}
+  </div>
+
+@endif
+
+<ul class="list-group">
+
+  @each(item in tasks)
+    <li class="list-group-item"><a href="/tasks/details/{{ item.slug }}">{{ item.title }}</a></li>
+  @endeach
+
+</ul>
+
+@endsection

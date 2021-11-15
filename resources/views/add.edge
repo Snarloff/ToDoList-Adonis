@@ -1,0 +1,33 @@
+@layout('layouts/main')
+@section('content')
+@set('title', 'Add Task')
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/">Home</a></li>
+    <li class="breadcrumb-item"><a href="/tasks">Tasks</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Add Task</li>
+  </ol>
+</nav>
+
+<h1 class="text-dark mb-3">Add Task</h1>
+
+<form class="mb-3" action="{{ route('/tasks/add') }}" method="POST">
+
+  {{ csrfField() }}
+
+  <label for="title" class="text-dark">Title</label>
+  <input type="text" name="title" class="form-control {{ hasErrorFor('title') ? 'is-invalid' : ''}}" placeholder="Your title">
+
+  {{ elIf('<div class="invalid-feedback mb-2">$self</div>', getErrorFor('title'), hasErrorFor('title')) }}
+
+  <label for="body" class="text-dark mt-2">Body</label>
+  <textarea name="body" class="form-control {{ hasErrorFor('body') ? 'is-invalid' : ''}}" placeholder="Your body"></textarea>
+
+  {{ elIf('<div class="invalid-feedback mb-2">$self</div>', getErrorFor('body'), hasErrorFor('body')) }}
+
+  <button type="submit" class="btn btn-success mt-2">New task</button>
+
+</form>
+
+@endsection
